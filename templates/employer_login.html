@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Recruiter Login - AI Job Portal{% endblock %}
+
+{% block content %}
+<div class="recruiter-login-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="recruiter-login-card">
+                    <!-- Header Section -->
+                    <div class="login-header">
+                        <div class="header-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h2 class="header-title">Recruiter Login</h2>
+                        <p class="header-subtitle">Access your recruitment dashboard and manage your talent pipeline</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form method="POST" class="login-form">
+                        <div class="form-section">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Demo Access</h6>
+                                    <p>Enter any company name to access the recruiter dashboard. This is a demonstration version.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="employer_name" class="form-label">Company Name *</label>
+                                <div class="input-container">
+                                    <i class="fas fa-building input-icon"></i>
+                                    <input type="text" class="form-control" id="employer_name" name="employer_name" 
+                                           placeholder="Enter your company name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-login">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Access Dashboard
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Features Section -->
+                    <div class="features-section">
+                        <h5 class="features-title">What you can do as a Recruiter:</h5>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Post Jobs</h6>
+                                    <p>Create and manage job postings</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>View Applications</h6>
+                                    <p>Review candidate applications</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Analytics</h6>
+                                    <p>Track recruitment metrics</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>AI Matching</h6>
+                                    <p>Get intelligent candidate matches</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer Links -->
+                    <div class="login-footer">
+                        <div class="footer-links">
+                            <p class="footer-text">
+                                Looking for a job? 
+                                <a href="{{ url_for('register') }}" class="footer-link">Register as Job Seeker</a>
+                            </p>
+                            <p class="footer-text">
+                                Already registered? 
+                                <a href="{{ url_for('login') }}" class="footer-link">Job Seeker Login</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/employer_login.css') }}?v=1.0">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/employer_login.js') }}"></script>
+{% endblock %}

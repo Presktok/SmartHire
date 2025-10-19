@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Job Seeker Dashboard - AI Job Portal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h1>Welcome back, {{ user.full_name }}!</h1>
+                <p>Your personalized job recommendations are ready</p>
+            </div>
+            <div class="profile-section">
+                <div class="profile-avatar">{{ user.full_name[0] }}</div>
+                <div class="profile-info">
+                    <h3>{{ user.full_name }}</h3>
+                    <p>{{ user.email }}</p>
+                </div>
+                <a href="#" class="btn-profile">Edit Profile</a>
+            </div>
+        </div>
+        <div class="search-section">
+            <h3>Quick Search</h3>
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search jobs..." id="jobSearch">
+                <button class="search-btn" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="sidebar">
+            <h3>Quick Stats</h3>
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Applications</span>
+                    <span class="stat-value">{{ recommendations|length * 2 }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Saved Jobs</span>
+                    <span class="stat-value">{{ recommendations|length * 3 }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Profile Views</span>
+                    <span class="stat-value">{{ recommendations|length * 15 }}</span>
+                </div>
+            </div>
+
+            <h3>Quick Actions</h3>
+            <div class="quick-actions">
+                <a href="{{ url_for('jobs') }}" class="btn-action">Browse Jobs</a>
+                <a href="#" class="btn-action">Update Resume</a>
+                <a href="#" class="btn-action">View Applications</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-header">
+                <h2>AI Recommended Jobs</h2>
+                <span class="jobs-badge">{{ recommendations|length }} Jobs</span>
+            </div>
+
+            <div class="jobs-grid">
+                {% if recommendations %}
+                    {% for rec in recommendations %}
+                        <div class="job-card">
+                            <div class="job-header">
+                                <div class="job-title">{{ rec.job.title }}</div>
+                                <div class="job-salary">{{ rec.job.salary or 'Salary not specified' }}</div>
+                            </div>
+                            <div class="job-company">{{ rec.job.company }}</div>
+                            <div class="job-description">{{ rec.job.description[:150] }}...</div>
+                            <div class="job-meta">
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i>{{ rec.job.location }}</span>
+                                <span class="meta-item"><i class="fas fa-clock"></i>{{ rec.job.job_type }}</span>
+                            </div>
+                            <div class="job-actions">
+                                <a href="#" class="btn-job btn-view">View Details</a>
+                                <a href="#" class="btn-job btn-apply">Apply Now</a>
+                                <a href="#" class="btn-job btn-save">Save</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-jobs">
+                        <i class="fas fa-search fa-3x"></i>
+                        <h3>No recommendations yet</h3>
+                        <p>Complete your profile to get personalized job recommendations.</p>
+                        <a href="{{ url_for('jobs') }}" class="btn-job btn-view">Browse All Jobs</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="jobDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Job Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="jobDetailsContent">
+                <!-- Job details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Apply for Job</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/dashboard.css') }}">
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Recruiter Dashboard - AI Job Portal{% endblock %}
+
+{% block head %}
+<link href="{{ url_for('static', filename='css/pages/employer_dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h1>Welcome back, {{ employer_name }}!</h1>
+                <p>Manage your job postings and applications</p>
+            </div>
+            <div class="dashboard-actions">
+                <a href="{{ url_for('post_job') }}" class="btn-dashboard">Post New Job</a>
+                <button class="btn-dashboard">View Analytics</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-content">
+                <div class="stat-number">{{ stats.active_jobs }}</div>
+                <div class="stat-label">Active Jobs</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+                <div class="stat-number">{{ stats.total_applications }}</div>
+                <div class="stat-label">Applications</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👁️</div>
+            <div class="stat-content">
+                <div class="stat-number">{{ stats.in_review }}</div>
+                <div class="stat-label">In Review</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+                <div class="stat-number">{{ stats.hired }}</div>
+                <div class="stat-label">Hired</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="sidebar">
+            <h3>Recent Applications</h3>
+            {% if recent_applications %}
+                <div class="recent-activity">
+                    {% for application in recent_applications[:3] %}
+                        <div class="activity-item">
+                            <div class="activity-icon">{{ application.name[0] }}</div>
+                            <div class="activity-content">
+                                <div class="activity-title">{{ application.name }}</div>
+                                <div class="activity-time">{{ application.time }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-applications">
+                    <i class="fas fa-inbox fa-2x"></i>
+                    <p>No applications yet</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="main-content">
+            <div class="content-header">
+                <h2>Active Job Postings</h2>
+                <span class="jobs-badge">{{ stats.active_jobs }} Jobs</span>
+            </div>
+
+            <div class="jobs-grid">
+                {% if jobs %}
+                    {% for job in jobs %}
+                        <div class="job-card">
+                            <div class="job-header">
+                                <div class="job-title">{{ job.title }}</div>
+                                <div class="job-status">Active</div>
+                            </div>
+                            <div class="job-company">{{ job.company }}</div>
+                            <div class="job-description">{{ job.description[:100] }}...</div>
+                            <div class="job-meta">
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i>{{ job.location }}</span>
+                                <span class="meta-item"><i class="fas fa-clock"></i>{{ job.job_type }}</span>
+                            </div>
+                            <div class="job-actions">
+                                <a href="#" class="btn-job btn-manage">Manage</a>
+                                <a href="#" class="btn-job btn-edit">Edit</a>
+                                <a href="#" class="btn-job btn-analytics">Analytics</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-jobs">
+                        <i class="fas fa-briefcase fa-3x"></i>
+                        <h3>No active jobs</h3>
+                        <p>Post your first job to start receiving applications.</p>
+                        <a href="{{ url_for('post_job') }}" class="btn-job btn-manage">Post New Job</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/employer_dashboard.css') }}">
+<script src="{{ url_for('static', filename='js/employer_dashboard.js') }}"></script>
+{% endblock %}

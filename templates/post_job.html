@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Post New Job - AI Job Portal{% endblock %}
+
+{% block content %}
+<div class="job-form-container">
+    <div class="job-form-card">
+        <div class="job-form-header">
+            <h2>Post New Job</h2>
+            <p>Create a job posting to attract top talent</p>
+        </div>
+
+        <form method="POST" class="job-form">
+            <div class="form-section">
+                <div class="section-title">Basic Information</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Job Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="e.g., Senior Developer" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" class="form-control" id="company" name="company" placeholder="e.g., TechCorp Inc." required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Job Description *</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="Describe the role and responsibilities..." required></textarea>
+                </div>
+
+                <div class="section-title">Requirements</div>
+
+                <div class="form-group">
+                    <label for="required_skills">Required Skills *</label>
+                    <textarea class="form-control" id="required_skills" name="required_skills" rows="2" placeholder="e.g., Python, Django, SQL" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience_required">Experience Required *</label>
+                        <select class="form-control" id="experience_required" name="experience_required" required>
+                            <option value="">Select Experience</option>
+                            <option value="0-1 years">Entry Level</option>
+                            <option value="1-3 years">1-3 years</option>
+                            <option value="3-5 years">3-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job_type">Job Type *</label>
+                        <select class="form-control" id="job_type" name="job_type" required>
+                            <option value="">Select Type</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Remote">Remote</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="e.g., New York, NY" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salary">Salary Range</label>
+                        <input type="text" class="form-control" id="salary" name="salary" placeholder="e.g., $80,000 - $120,000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_email">Contact Email *</label>
+                    <input type="email" class="form-control" id="contact_email" name="contact_email" placeholder="hr@company.com" required>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-post-job">Post Job</button>
+                <a href="{{ url_for('employer_dashboard') }}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/post_job.css') }}">
+<script src="{{ url_for('static', filename='js/post_job.js') }}"></script>
+{% endblock %}

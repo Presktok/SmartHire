@@ -1,0 +1,436 @@
+{% extends "base.html" %}
+
+{% block title %}Job Seeker Registration - AI Job Portal{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="registration-card">
+                    <!-- Header Section -->
+                    <div class="registration-header">
+                        <div class="header-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h2 class="header-title">Job Seeker Registration</h2>
+                        <p class="header-subtitle">Create your professional profile and start your career journey</p>
+                    </div>
+                    
+                    <!-- Registration Form -->
+                    <form method="POST" enctype="multipart/form-data" class="registration-form">
+                        <div class="form-row">
+                            <!-- Left Column -->
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="username" class="form-label">Username *</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password" class="form-label">Password *</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="skills" class="form-label">Skills *</label>
+                                    <textarea class="form-control" id="skills" name="skills" rows="4" 
+                                              placeholder="e.g., Python, JavaScript, React, Machine Learning, Data Analysis" required></textarea>
+                                    <div class="form-help">List your skills separated by commas. This helps our AI find better job matches.</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="experience" class="form-label">Experience Level *</label>
+                                    <select class="form-control" id="experience" name="experience" required>
+                                        <option value="">Select Experience</option>
+                                        <option value="0-1 years">0-1 years (Fresher)</option>
+                                        <option value="1-3 years">1-3 years</option>
+                                        <option value="3-5 years">3-5 years</option>
+                                        <option value="5-10 years">5-10 years</option>
+                                        <option value="10+ years">10+ years</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="resume" class="form-label">Resume Upload</label>
+                                    <div class="file-upload-container">
+                                        <input type="file" class="form-control file-input" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                                        <div class="file-upload-text">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span class="file-text">Choose File</span>
+                                            <span class="file-hint">No file chosen</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-help">Upload your resume (PDF, DOC, or DOCX format). Maximum file size: 5MB.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Column -->
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="full_name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="location" class="form-label">Location *</label>
+                                    <input type="text" class="form-control" id="location" name="location" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="education" class="form-label">Education *</label>
+                                    <select class="form-control" id="education" name="education" required>
+                                        <option value="">Select Education</option>
+                                        <option value="High School">High School</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                        <option value="Master's Degree">Master's Degree</option>
+                                        <option value="PhD">PhD</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="resume_summary" class="form-label">Professional Summary</label>
+                                    <textarea class="form-control" id="resume_summary" name="resume_summary" rows="4" 
+                                              placeholder="Brief summary of your professional background, achievements, and career objectives..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="form-submit">
+                            <button type="submit" class="btn-register">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Footer Links -->
+                    <div class="registration-footer">
+                        <p class="footer-text">
+                            Already have an account? 
+                            <a href="{{ url_for('login') }}" class="footer-link">Sign In</a>
+                        </p>
+                        <p class="footer-text">
+                            Are you an employer? 
+                            <a href="{{ url_for('employer_login') }}" class="footer-link">Employer Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/register.css') }}">
+.registration-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.registration-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.registration-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.registration-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.header-icon {
+    position: relative;
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.header-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.header-title {
+    position: relative;
+    z-index: 1;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-subtitle {
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 300;
+}
+
+.registration-form {
+    padding: 3rem 2rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control::placeholder {
+    color: #a0aec0;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+.form-help {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.file-upload-container {
+    position: relative;
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    cursor: pointer;
+}
+
+.file-upload-container:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-upload-text i {
+    font-size: 2rem;
+    color: #667eea;
+}
+
+.file-text {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.file-hint {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.form-submit {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-register {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+.registration-footer {
+    background: #f8fafc;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer-text {
+    margin: 0.5rem 0;
+    color: #718096;
+    font-size: 0.95rem;
+}
+
+.footer-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .registration-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .header-title {
+        font-size: 2rem;
+    }
+    
+    .registration-form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .registration-footer {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 1rem 0;
+    }
+    
+    .registration-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .header-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .header-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .header-title {
+        font-size: 1.75rem;
+    }
+    
+    .registration-form {
+        padding: 1.5rem 1rem;
+    }
+    
+    .btn-register {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}
